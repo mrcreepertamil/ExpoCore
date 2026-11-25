@@ -4,37 +4,62 @@ This module adds ExpoCraft-specific native C++ runtime functionality to ExpoCore
 
 ## ExpoVoxelWorld
 
-`ExpoVoxelWorld` is a `RefCounted` object that stores a three-dimensional grid of
-16-bit block IDs. It is exposed to Godot's ClassDB, so GDScript and other engine
-systems can create and use it.
+`ExpoVoxelWorld` stores a three-dimensional grid of 16-bit block IDs. Block ID
+0 is reserved for air/empty space.
 
-### Manual block editing
+## JSON content definitions
+
+ExpoCraft content metadata is stored as JSON under the repository's `data/`
+directory. The initial data files are:
+
+- `blocks.json`: stable namespaced block IDs, numeric voxel IDs, texture paths,
+  physical properties, and drops.
+- `biomes.json`: climate values, terrain block references, terrain parameters,
+  features, and spawn groups.
+- `entities.json`: entity scenes, stats, behavior configuration, and drops.
+- `items.json`: item categories, icons, stack limits, block placement, tools,
+  and food properties.
+- `recipes.json`: shaped and shapeless crafting recipe data.
+
+Definitions use namespaced string IDs such as `expo:stone`. Block definitions
+also have a unique `numeric_id` from 1 through 65535; 0 remains reserved for air.
+References between definitions are strings, so content can be extended without
+renumbering every item or entity.
+
+### Loading definitions from GDScript
 
 ```gdscript
-var world := ExpoVoxelWorld.new()
-world.set_size(Vector3i(16, 64, 16))
-world.set_block(Vector3i(2, 10, 3), 1)
+var content := ExpoContentRegistry.new()
 
-var block_id: int = world.get_block(Vector3i(2, 10, 3))
-print(block_id)
+content.load_json("blocks", "res://data/blocks.json")
+content.load_json("biomes", "res://data/biomes.json")
+content.load_json("entities", "res://data/entities.json")
+content.load_json("items", "res://data/items.json")
+content.load_json("recipes", "res://data/recipes.json")
+
+var stone: Dictionary = content.get_definition("blocks", "expo:stone")
+var stone_numeric_id: int = content.get_block_numeric_id("expo:stone")
+print(stone.get("name"), " -> ", stone_numeric_id)
+
+for biome_id in content.get_ids("biomes"):
+    print(biome_id)
 ```
 
-### Seeded terrain generation
+The registry validates JSON structure, required string IDs, duplicate IDs,
+and unique block numeric IDs. A category is replaced only after its entire file
+passes validation. It exposes parsed dictionaries to GDScript; it does not yet
+instantiate scenes, render blocks, execute entity AI, generate biome
+transitions, or run crafting recipes. Those systems consume the metadata in
+later runtime work.
+
+## Seeded terrain generation
 
 ```gdscript
 var world := ExpoVoxelWorld.new()
 world.set_size(Vector3i(64, 64, 64))
-
-# The same seed and settings produce the same terrain.
 world.generate_terrain(123456, 24, 12, 1, 2, 3)
-print("World seed: ", world.get_seed())
 ```
 
-The generator creates deterministic, smoothly varying terrain from the supplied
-64-bit seed. It fills each column from the bottom upward, using the supplied
-grass, dirt, and stone block IDs. The height is controlled by the base height
-and height variation. Block ID 0 is reserved for empty space.
-
-This is an initial terrain generator, not a complete Minecraft-style world
-generator. Biomes, caves, ores, trees, chunk streaming, meshing, rendering,
-saving, collision, and player movement are future systems.
+The current terrain generator uses deterministic noise and the supplied numeric
+IDs. Biome selection and per-biome terrain settings are not yet connected to
+the generator.
