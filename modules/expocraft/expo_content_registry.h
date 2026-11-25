@@ -9,7 +9,7 @@
 #pragma once
 
 #include "core/object/ref_counted.h"
-#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
 
 class ExpoContentRegistry : public RefCounted {
 	GDCLASS(ExpoContentRegistry, RefCounted);
