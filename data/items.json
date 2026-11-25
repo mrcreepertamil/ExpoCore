@@ -14,7 +14,11 @@
     "icon": "res://textures/items/wooden_pickaxe.png",
     "max_stack": 1,
     "durability": 59,
-    "tool": { "type": "pickaxe", "tier": 1, "speed": 2.0 }
+    "tool": {
+      "type": "pickaxe",
+      "tier": 1,
+      "speed": 2
+    }
   },
   {
     "id": "expo:apple",
@@ -22,7 +26,10 @@
     "category": "food",
     "icon": "res://textures/items/apple.png",
     "max_stack": 64,
-    "food": { "nutrition": 4, "saturation": 2.4 }
+    "food": {
+      "nutrition": 4,
+      "saturation": 2.4
+    }
   },
   {
     "id": "expo:carrot",
@@ -30,6 +37,65 @@
     "category": "food",
     "icon": "res://textures/items/carrot.png",
     "max_stack": 64,
-    "food": { "nutrition": 3, "saturation": 1.8 }
+    "food": {
+      "nutrition": 3,
+      "saturation": 1.8
+    }
+  },
+  {
+    "id": "expo:oak_log",
+    "name": "Oak Log",
+    "category": "material",
+    "icon": "res://textures/items/oak_log.png",
+    "max_stack": 64
+  },
+  {
+    "id": "expo:oak_planks",
+    "name": "Oak Planks",
+    "category": "material",
+    "icon": "res://textures/items/oak_planks.png",
+    "max_stack": 64
+  },
+  {
+    "id": "expo:stick",
+    "name": "Stick",
+    "category": "material",
+    "icon": "res://textures/items/stick.png",
+    "max_stack": 64
+  },
+  {
+    "id": "expo:cobblestone",
+    "name": "Cobblestone",
+    "category": "material",
+    "icon": "res://textures/items/cobblestone.png",
+    "max_stack": 64
+  },
+  {
+    "id": "expo:raw_pork",
+    "name": "Raw Pork",
+    "category": "food",
+    "icon": "res://textures/items/raw_pork.png",
+    "max_stack": 64
+  },
+  {
+    "id": "expo:raw_beef",
+    "name": "Raw Beef",
+    "category": "food",
+    "icon": "res://textures/items/raw_beef.png",
+    "max_stack": 64
+  },
+  {
+    "id": "expo:rotten_flesh",
+    "name": "Rotten Flesh",
+    "category": "material",
+    "icon": "res://textures/items/rotten_flesh.png",
+    "max_stack": 64
+  },
+  {
+    "id": "expo:wheat",
+    "name": "Wheat",
+    "category": "material",
+    "icon": "res://textures/items/wheat.png",
+    "max_stack": 64
   }
 ]
