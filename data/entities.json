@@ -1,0 +1,29 @@
+[
+  {
+    "id": "expo:pig",
+    "name": "Pig",
+    "category": "passive",
+    "scene": "res://entities/pig/pig.tscn",
+    "stats": { "health": 10, "movement_speed": 2.5 },
+    "behavior": { "brain": "wander", "follow_item": "expo:carrot" },
+    "drops": [{ "item": "expo:raw_pork", "min": 1, "max": 3 }]
+  },
+  {
+    "id": "expo:cow",
+    "name": "Cow",
+    "category": "passive",
+    "scene": "res://entities/cow/cow.tscn",
+    "stats": { "health": 10, "movement_speed": 2.0 },
+    "behavior": { "brain": "wander", "follow_item": "expo:wheat" },
+    "drops": [{ "item": "expo:raw_beef", "min": 1, "max": 3 }]
+  },
+  {
+    "id": "expo:zombie",
+    "name": "Zombie",
+    "category": "hostile",
+    "scene": "res://entities/zombie/zombie.tscn",
+    "stats": { "health": 20, "movement_speed": 2.3, "attack_damage": 3 },
+    "behavior": { "brain": "hostile_melee", "target": "player", "burns_in_daylight": true },
+    "drops": [{ "item": "expo:rotten_flesh", "min": 0, "max": 2 }]
+  }
+]
