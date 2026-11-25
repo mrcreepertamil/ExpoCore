@@ -31,11 +31,13 @@
 #include "register_types.h"
 
 #include "core/object/class_db.h"
+#include "expo_content_registry.h"
 #include "expo_voxel_world.h"
 
 void initialize_expocraft_module(ModuleInitializationLevel p_level) {
 	if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE) {
 		GDREGISTER_CLASS(ExpoVoxelWorld);
+		GDREGISTER_CLASS(ExpoContentRegistry);
 	}
 }
 
