@@ -1,10 +1,6 @@
 /**************************************************************************/
 /*  expo_content_registry.cpp                                             */
 /**************************************************************************/
-/*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
-/**************************************************************************/
 
 #include "expo_content_registry.h"
 
@@ -88,6 +84,41 @@ int ExpoContentRegistry::get_block_numeric_id(const StringName &p_id) const {
 	return int(definition.get("numeric_id", 0));
 }
 
+StringName ExpoContentRegistry::get_block_identifier(int p_numeric_id) const {
+	ERR_FAIL_COND_V(p_numeric_id < 1 || p_numeric_id > 65535, StringName());
+	const PackedStringArray ids = get_ids(StringName("blocks"));
+	for (int i = 0; i < ids.size(); i++) {
+		const StringName id = ids[i];
+		if (get_block_numeric_id(id) == p_numeric_id) {
+			return id;
+		}
+	}
+	return StringName();
+}
+
+StringName ExpoContentRegistry::get_best_biome(float p_temperature, float p_humidity) const {
+	const PackedStringArray ids = get_ids(StringName("biomes"));
+	ERR_FAIL_COND_V(ids.is_empty(), StringName());
+
+	StringName best_id;
+	float best_distance = INFINITY;
+	for (int i = 0; i < ids.size(); i++) {
+		const StringName id = ids[i];
+		const Dictionary biome = get_definition(StringName("biomes"), id);
+		const Dictionary climate = biome.get("climate", Dictionary());
+		const float temperature = float(climate.get("temperature", 0.5));
+		const float humidity = float(climate.get("humidity", 0.5));
+		const float delta_temperature = temperature - p_temperature;
+		const float delta_humidity = humidity - p_humidity;
+		const float distance = delta_temperature * delta_temperature + delta_humidity * delta_humidity;
+		if (distance < best_distance) {
+			best_distance = distance;
+			best_id = id;
+		}
+	}
+	return best_id;
+}
+
 bool ExpoContentRegistry::has_definition(const StringName &p_category, const StringName &p_id) const {
 	const Dictionary category_definitions = categories.get(p_category, Dictionary());
 	return category_definitions.has(p_id);
@@ -102,6 +133,8 @@ void ExpoContentRegistry::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_definition", "category", "id"), &ExpoContentRegistry::get_definition);
 	ClassDB::bind_method(D_METHOD("get_ids", "category"), &ExpoContentRegistry::get_ids);
 	ClassDB::bind_method(D_METHOD("get_block_numeric_id", "id"), &ExpoContentRegistry::get_block_numeric_id);
+	ClassDB::bind_method(D_METHOD("get_block_identifier", "numeric_id"), &ExpoContentRegistry::get_block_identifier);
+	ClassDB::bind_method(D_METHOD("get_best_biome", "temperature", "humidity"), &ExpoContentRegistry::get_best_biome);
 	ClassDB::bind_method(D_METHOD("has_definition", "category", "id"), &ExpoContentRegistry::has_definition);
 	ClassDB::bind_method(D_METHOD("clear"), &ExpoContentRegistry::clear);
 }
