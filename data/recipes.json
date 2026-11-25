@@ -1,0 +1,18 @@
+[
+  {
+    "id": "expo:wooden_pickaxe",
+    "type": "crafting_shaped",
+    "pattern": ["PPP", " S ", " S "],
+    "key": {
+      "P": "expo:oak_planks",
+      "S": "expo:stick"
+    },
+    "result": { "item": "expo:wooden_pickaxe", "count": 1 }
+  },
+  {
+    "id": "expo:oak_planks_from_log",
+    "type": "crafting_shapeless",
+    "ingredients": ["expo:oak_log"],
+    "result": { "item": "expo:oak_planks", "count": 4 }
+  }
+]
