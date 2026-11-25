@@ -4,9 +4,8 @@ This module adds ExpoCraft-specific native C++ runtime functionality to ExpoCore
 
 ## ExpoVoxelWorld
 
-`ExpoVoxelWorld` is a `RefCounted` object that stores a three-dimensional grid of
-16-bit block IDs. It is exposed to Godot's ClassDB, so GDScript and other engine
-systems can create and use it.
+`ExpoVoxelWorld` stores a three-dimensional grid of 16-bit block IDs. Block ID
+0 is reserved for air/empty space.
 
 ### Manual block editing
 
@@ -24,17 +23,45 @@ print(block_id)
 ```gdscript
 var world := ExpoVoxelWorld.new()
 world.set_size(Vector3i(64, 64, 64))
-
-# The same seed and settings produce the same terrain.
 world.generate_terrain(123456, 24, 12, 1, 2, 3)
 print("World seed: ", world.get_seed())
 ```
 
-The generator creates deterministic, smoothly varying terrain from the supplied
-64-bit seed. It fills each column from the bottom upward, using the supplied
-grass, dirt, and stone block IDs. The height is controlled by the base height
-and height variation. Block ID 0 is reserved for empty space.
+The current generator uses deterministic noise and the supplied numeric block IDs.
+Biome selection and per-biome terrain settings are not yet connected.
 
-This is an initial terrain generator, not a complete Minecraft-style world
-generator. Biomes, caves, ores, trees, chunk streaming, meshing, rendering,
-saving, collision, and player movement are future systems.
+## JSON content definitions
+
+Content metadata is stored as JSON under the repository's `data/` directory:
+
+- `blocks.json`: namespaced IDs, numeric voxel IDs, textures, physical properties, and drops.
+- `biomes.json`: climate, terrain settings, features, and spawn groups.
+- `entities.json`: entity scenes, stats, behaviour settings, and drops.
+- `items.json`: item categories, icons, stack limits, tools, and food properties.
+- `recipes.json`: shaped and shapeless crafting recipe data.
+
+Definitions use namespaced IDs such as `expo:stone`. Blocks also have unique
+numeric IDs from 1 to 65535; 0 is reserved for air.
+
+### Load JSON from GDScript
+
+```gdscript
+var content := ExpoContentRegistry.new()
+
+content.load_json("blocks", "res://data/blocks.json")
+content.load_json("biomes", "res://data/biomes.json")
+content.load_json("entities", "res://data/entities.json")
+content.load_json("items", "res://data/items.json")
+content.load_json("recipes", "res://data/recipes.json")
+
+var stone: Dictionary = content.get_definition("blocks", "expo:stone")
+print(stone.get("name"))
+print(content.get_block_numeric_id("expo:stone"))
+```
+
+The registry validates JSON arrays, string IDs, duplicate IDs, and unique block
+numeric IDs. It only replaces a category after its full file passes validation.
+It exposes metadata dictionaries to GDScript; it does not yet instantiate scenes,
+execute entity AI, render blocks, select biomes during world generation, or run
+crafting recipes. Those gameplay systems must consume the loaded definitions in
+subsequent implementation work.
