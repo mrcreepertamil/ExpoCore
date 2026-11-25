@@ -8,6 +8,8 @@
 
 #include "expo_voxel_world.h"
 
+#include <cstdint>
+
 #include "core/object/class_db.h"
 
 bool ExpoVoxelWorld::_is_position_valid(const Vector3i &p_position) const {
