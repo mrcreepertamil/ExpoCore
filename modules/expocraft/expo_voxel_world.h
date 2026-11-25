@@ -17,6 +17,7 @@ class ExpoVoxelWorld : public RefCounted {
 
 	Vector3i dimensions;
 	Vector<uint16_t> blocks;
+	int64_t world_seed = 0;
 
 	bool _is_position_valid(const Vector3i &p_position) const;
 	int _get_index(const Vector3i &p_position) const;
@@ -27,6 +28,10 @@ protected:
 public:
 	bool set_size(const Vector3i &p_dimensions);
 	Vector3i get_size() const;
+
+	void set_seed(int64_t p_seed);
+	int64_t get_seed() const;
+	bool generate_terrain(int64_t p_seed, int p_base_height, int p_height_variation, int p_grass_block_id, int p_dirt_block_id, int p_stone_block_id);
 
 	bool set_block(const Vector3i &p_position, int p_block_id);
 	int get_block(const Vector3i &p_position) const;
