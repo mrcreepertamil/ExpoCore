@@ -1,0 +1,35 @@
+[
+  {
+    "id": "expo:grass_block",
+    "name": "Grass Block",
+    "category": "block",
+    "icon": "res://textures/items/grass_block.png",
+    "max_stack": 64,
+    "places_block": "expo:grass_block"
+  },
+  {
+    "id": "expo:wooden_pickaxe",
+    "name": "Wooden Pickaxe",
+    "category": "tool",
+    "icon": "res://textures/items/wooden_pickaxe.png",
+    "max_stack": 1,
+    "durability": 59,
+    "tool": { "type": "pickaxe", "tier": 1, "speed": 2.0 }
+  },
+  {
+    "id": "expo:apple",
+    "name": "Apple",
+    "category": "food",
+    "icon": "res://textures/items/apple.png",
+    "max_stack": 64,
+    "food": { "nutrition": 4, "saturation": 2.4 }
+  },
+  {
+    "id": "expo:carrot",
+    "name": "Carrot",
+    "category": "food",
+    "icon": "res://textures/items/carrot.png",
+    "max_stack": 64,
+    "food": { "nutrition": 3, "saturation": 1.8 }
+  }
+]
