@@ -1,10 +1,6 @@
 /**************************************************************************/
 /*  expo_content_registry.h                                               */
 /**************************************************************************/
-/*                         This file is part of:                          */
-/*                             GODOT ENGINE                               */
-/*                        https://godotengine.org                         */
-/**************************************************************************/
 
 #pragma once
 
@@ -26,6 +22,8 @@ public:
 	Dictionary get_definition(const StringName &p_category, const StringName &p_id) const;
 	PackedStringArray get_ids(const StringName &p_category) const;
 	int get_block_numeric_id(const StringName &p_id) const;
+	StringName get_block_identifier(int p_numeric_id) const;
+	StringName get_best_biome(float p_temperature, float p_humidity) const;
 	bool has_definition(const StringName &p_category, const StringName &p_id) const;
 	void clear();
 };
