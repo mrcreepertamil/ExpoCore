@@ -1,0 +1,53 @@
+[
+  {
+    "id": "expo:plains",
+    "name": "Plains",
+    "climate": { "temperature": 0.8, "humidity": 0.4 },
+    "terrain": {
+      "base_height": 24,
+      "height_variation": 4,
+      "surface_block": "expo:grass_block",
+      "subsurface_block": "expo:dirt",
+      "stone_block": "expo:stone"
+    },
+    "features": ["expo:oak_tree", "expo:grass_patch"],
+    "spawns": {
+      "passive": ["expo:pig", "expo:cow", "expo:sheep"],
+      "hostile": ["expo:zombie", "expo:skeleton"]
+    }
+  },
+  {
+    "id": "expo:forest",
+    "name": "Forest",
+    "climate": { "temperature": 0.7, "humidity": 0.8 },
+    "terrain": {
+      "base_height": 26,
+      "height_variation": 7,
+      "surface_block": "expo:grass_block",
+      "subsurface_block": "expo:dirt",
+      "stone_block": "expo:stone"
+    },
+    "features": ["expo:oak_tree", "expo:birch_tree", "expo:fern"],
+    "spawns": {
+      "passive": ["expo:pig", "expo:cow", "expo:sheep"],
+      "hostile": ["expo:zombie", "expo:skeleton"]
+    }
+  },
+  {
+    "id": "expo:desert",
+    "name": "Desert",
+    "climate": { "temperature": 2.0, "humidity": 0.0 },
+    "terrain": {
+      "base_height": 22,
+      "height_variation": 5,
+      "surface_block": "expo:sand",
+      "subsurface_block": "expo:sand",
+      "stone_block": "expo:stone"
+    },
+    "features": ["expo:cactus", "expo:dead_bush"],
+    "spawns": {
+      "passive": [],
+      "hostile": ["expo:zombie", "expo:skeleton"]
+    }
+  }
+]
