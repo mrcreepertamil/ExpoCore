@@ -46,7 +46,7 @@ Array ExpoEntitySpawner::spawn_biome_group(const Dictionary &p_biome_definition,
 	ERR_FAIL_COND_V(p_count < 0 || p_radius < 0.0f, spawned);
 
 	const Dictionary spawns = p_biome_definition.get("spawns", Dictionary());
-	const Array entity_ids = spawns.get(p_group, Array());
+	const Array entity_ids = spawns.get(String(p_group), Array());
 	if (entity_ids.is_empty()) {
 		return spawned;
 	}
