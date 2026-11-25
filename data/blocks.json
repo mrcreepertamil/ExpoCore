@@ -1,0 +1,75 @@
+[
+  {
+    "id": "expo:grass_block",
+    "numeric_id": 1,
+    "name": "Grass Block",
+    "textures": {
+      "top": "res://textures/blocks/grass_block_top.png",
+      "side": "res://textures/blocks/grass_block_side.png",
+      "bottom": "res://textures/blocks/dirt.png"
+    },
+    "properties": {
+      "solid": true,
+      "transparent": false,
+      "hardness": 0.6,
+      "flammable": false,
+      "tool": "shovel"
+    },
+    "drops": ["expo:grass_block"]
+  },
+  {
+    "id": "expo:dirt",
+    "numeric_id": 2,
+    "name": "Dirt",
+    "textures": { "all": "res://textures/blocks/dirt.png" },
+    "properties": {
+      "solid": true,
+      "transparent": false,
+      "hardness": 0.5,
+      "flammable": false,
+      "tool": "shovel"
+    },
+    "drops": ["expo:dirt"]
+  },
+  {
+    "id": "expo:stone",
+    "numeric_id": 3,
+    "name": "Stone",
+    "textures": { "all": "res://textures/blocks/stone.png" },
+    "properties": {
+      "solid": true,
+      "transparent": false,
+      "hardness": 1.5,
+      "flammable": false,
+      "tool": "pickaxe"
+    },
+    "drops": ["expo:cobblestone"]
+  },
+  {
+    "id": "expo:sand",
+    "numeric_id": 4,
+    "name": "Sand",
+    "textures": { "all": "res://textures/blocks/sand.png" },
+    "properties": {
+      "solid": true,
+      "transparent": false,
+      "hardness": 0.5,
+      "gravity": true,
+      "tool": "shovel"
+    },
+    "drops": ["expo:sand"]
+  },
+  {
+    "id": "expo:water",
+    "numeric_id": 5,
+    "name": "Water",
+    "textures": { "all": "res://textures/blocks/water.png" },
+    "properties": {
+      "solid": false,
+      "transparent": true,
+      "liquid": true,
+      "hardness": 100.0
+    },
+    "drops": []
+  }
+]
