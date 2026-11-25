@@ -9,6 +9,7 @@
 #include "core/object/ref_counted.h"
 #include "core/templates/vector.h"
 #include "core/math/vector3i.h"
+#include "core/variant/variant.h"
 
 class ArrayMesh;
 class ExpoContentRegistry;
