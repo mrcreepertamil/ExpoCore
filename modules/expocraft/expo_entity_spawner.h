@@ -4,6 +4,9 @@
 
 #pragma once
 
+#include <cstdint>
+
+#include "core/variant/variant.h"
 #include "scene/3d/node_3d.h"
 
 class ExpoContentRegistry;
