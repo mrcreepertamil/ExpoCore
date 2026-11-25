@@ -101,7 +101,7 @@ StringName ExpoContentRegistry::get_best_biome(float p_temperature, float p_humi
 	ERR_FAIL_COND_V(ids.is_empty(), StringName());
 
 	StringName best_id;
-	float best_distance = INFINITY;
+	float best_distance = 1.0e30f;
 	for (int i = 0; i < ids.size(); i++) {
 		const StringName id = ids[i];
 		const Dictionary biome = get_definition(StringName("biomes"), id);
