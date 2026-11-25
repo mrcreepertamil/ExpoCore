@@ -97,5 +97,21 @@
     "category": "material",
     "icon": "res://textures/items/wheat.png",
     "max_stack": 64
+  },
+  {
+    "id": "expo:dirt",
+    "name": "Dirt",
+    "category": "block",
+    "icon": "res://textures/items/dirt.png",
+    "max_stack": 64,
+    "places_block": "expo:dirt"
+  },
+  {
+    "id": "expo:sand",
+    "name": "Sand",
+    "category": "block",
+    "icon": "res://textures/items/sand.png",
+    "max_stack": 64,
+    "places_block": "expo:sand"
   }
 ]
