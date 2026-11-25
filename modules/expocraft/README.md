@@ -1,6 +1,6 @@
 # ExpoCraft native runtime module
 
-This module adds the first ExpoCraft-specific native C++ runtime class to ExpoCore.
+This module adds ExpoCraft-specific native C++ runtime functionality to ExpoCore.
 
 ## ExpoVoxelWorld
 
@@ -8,7 +8,7 @@ This module adds the first ExpoCraft-specific native C++ runtime class to ExpoCo
 16-bit block IDs. It is exposed to Godot's ClassDB, so GDScript and other engine
 systems can create and use it.
 
-Example:
+### Manual block editing
 
 ```gdscript
 var world := ExpoVoxelWorld.new()
@@ -19,8 +19,22 @@ var block_id: int = world.get_block(Vector3i(2, 10, 3))
 print(block_id)
 ```
 
-Coordinates outside the configured dimensions are rejected. Block ID 0 represents
-an empty block by convention; IDs 1 through 65535 are available to the game.
+### Seeded terrain generation
 
-This is the storage foundation only. Chunk meshing, rendering, world generation,
-saving, collision, and player movement are separate systems to be added later.
+```gdscript
+var world := ExpoVoxelWorld.new()
+world.set_size(Vector3i(64, 64, 64))
+
+# The same seed and settings produce the same terrain.
+world.generate_terrain(123456, 24, 12, 1, 2, 3)
+print("World seed: ", world.get_seed())
+```
+
+The generator creates deterministic, smoothly varying terrain from the supplied
+64-bit seed. It fills each column from the bottom upward, using the supplied
+grass, dirt, and stone block IDs. The height is controlled by the base height
+and height variation. Block ID 0 is reserved for empty space.
+
+This is an initial terrain generator, not a complete Minecraft-style world
+generator. Biomes, caves, ores, trees, chunk streaming, meshing, rendering,
+saving, collision, and player movement are future systems.
